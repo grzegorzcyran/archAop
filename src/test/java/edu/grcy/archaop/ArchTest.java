@@ -30,10 +30,14 @@ public class ArchTest {
         ArchRule rule = classes().that().resideInAPackage("edu.grcy.archaop.account")
                 .and().haveNameNotMatching(".*AccessPoint")
                 .or().resideInAPackage("edu.grcy.archaop.account")
-                .and().areNotAnnotatedWith(RestController.class)
+                .and().areNotAnnotatedWith(RestController.class) //jesli zamiast tego warunku wpiszemy "RestController" to test nie przejdzie
                         .should().notBePublic()
                 .because("We want to keep our classes not visible to the outside world");
 
         rule.check(classes);
     }
+
+    //napiszcie test który sprawdzi czy w pakiecie customer klasy są package private
+    //i nie są adnotowane jako RestController
+    //spróbujcie dopisać test dla metod w tych klasach, metody też nie powinny być public
 }
