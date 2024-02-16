@@ -1,0 +1,45 @@
+Architektura: monolityczna, modularna, mikroserwisowa
+
+### Monolityczna
+- Wszystkie funkcje w jednym miejscu
+- Najczęściej jedna baza danych
+- Brak wydzielonych modułów, serwisów, charakterystycznych punktów komunikacji
+- Wzrost złożoności wraz z rozwojem aplikacji
+- Trudność w utrzymaniu, rozbudowie, testowaniu, wdrażaniu
+- Problem z skalowaniem
+- Ale łatwa do implementacji i szybka w działaniu - przynajmniej na początku
+- Ma niski próg wejścia dla osób zaczynających przygodę z programowaniem
+- Ma niski próg wejścia dla osób dołączających do projektu
+
+### Modularny monolit
+- Monolit, ale z wydzielonymi modułami, czyli częściami aplikacji które są od siebie niezależne
+- Moduły mogą być wewnętrznie monolityczne
+- Moduły komunikują się ze sobą poprzez interfejsy
+- Poszczególne moduły nie sięgają do bazy danych innych modułów
+- Moduły mogą być rozwijane, testowane, wdrażane niezależnie - to trochę zależy od wybranej technologii
+- Wzrost złożoności wraz z rozwojem aplikacji
+- Trudniejsze w zrozumieniu, ale łatwiejsze w utrzymaniu, rozbudowie, testowaniu, wdrażaniu
+- Problem z skalowaniem - rozwiązaniem może być wydzielenie modułów jako mikroserwisy
+- Trudniejsze w zrozumieniu niż monolit dla osób junior
+- Trudniejsze niż monolit dla osób dołączających do projektu -
+bo jest narzut komunikacji między modułami, potencjalnie też narzut technologii
+- Może się okazać ze moduły są pisane w różny sposób bo różne osoby / zespoły je pisały
+- Łatwiej delegować moduły do różnych zespołów, nawet na zewnątrz firmy
+
+### Mikroserwisy
+- Funkcjonalności w osobno rozwijanych jednostkach (repozytoria, infra)
+- Teoretycznie osobne wdrożenia, testy, rozwój
+- Każdy mikroserwis ma swoją bazę danych (powinien mieć)
+- Mikroserwisy komunikują się ze sobą (najczęściej) poprzez API - często asynchronicznie
+- Wzrost złożoności wraz z rozwojem aplikacji
+- Trudniejsze w zrozumieniu, ale łatwiejsze w utrzymaniu, rozbudowie, testowaniu, wdrażaniu
+- Łatwiejsze w skalowaniu
+- Trudniejsze w zrozumieniu niż monolit dla osób junior
+- Trudniejsze niż monolit dla osób dołączających do projektu
+- Często pisane w różnych technologiach, aż do skali patologicznej
+- Dodatkowy wysiłek włożony w obsługę logowania, monitoringu
+- Dodatkowy wysiłek na okoliczność że mikroserwisy mogą się wyłączać, restartować, itp. - trzeba to obsłużyć np Circuit Breakerem
+- Mikroserwisy jednak w jakimś stopniu też zależą jeden od drugiego więc nie do końca mamy do czynienia
+z niezależnymi wdrożeniami i uruchamianie też czasem musi być zgrane
+- Zmiana założeń biznesowych może powodować konieczność unifikacji kilku serwisów w jeden
+- Zmiana założeń biznesowych może spowodować że kawałki kilku mikroserwisów trzeba wydzielić i utworzyć nowy
